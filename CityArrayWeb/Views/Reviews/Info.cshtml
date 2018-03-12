@@ -1,0 +1,82 @@
+﻿@model CityArrayWeb.ModelView.ReviewView
+
+@{
+    Layout = "~/Views/Shared/_Layout_review.cshtml";
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<div>
+    <h4>ReviewView</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @MyHelpers.SetRating(Model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CityDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CityFeatures)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityFeatures)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CityBags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityBags)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Recommendations {
+    
+@Html.Action(nameof(CityArrayWeb.Controllers.ReviewsController.RecommendedReviews), new { reviewId = Model.Id, count = 4 })
+
+
+}

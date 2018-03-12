@@ -1,0 +1,86 @@
+﻿@model CityArrayWeb.ModelView.CityModify
+@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "AddCity";
+}
+
+<h2>Add City</h2>
+<hr />
+
+@using (Html.BeginForm("Add", "City", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CountryId, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            <select class="selectpicker" data-live-search="true" name="CountryId">
+                <option>Select Country</option>
+
+                @foreach (var country in ViewBag.Countries)
+                {
+                    <option value="@country.Value">@country.Key</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsCapital, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(m => m.IsCapital)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Latitude, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextAreaFor(m => m.Latitude, new { @class = "form-control", rows = "4" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Longitude, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextAreaFor(m => m.Longitude, new { @class = "form-control", rows = "4" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Picture</label>
+        <div class="col-sm-10">
+            <input class="btn btn-default" type="file" id="Picture" name="picture">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                Add
+            </button>
+            &nbsp;|&nbsp;
+            <a href="@Url.Action("Index")"><span class="glyphicon glyphicon-list"></span>&nbsp;Back to list</a>
+        </div>
+    </div>
+
+
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

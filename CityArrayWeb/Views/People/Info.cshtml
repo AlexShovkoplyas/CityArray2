@@ -1,0 +1,65 @@
+﻿@model CityArrayWeb.ModelView.PersonView
+
+@{
+    ViewBag.Title = "Info";
+}
+
+<h2>Info</h2>
+
+<div>
+    <h4>PersonView</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NickName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NickName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>
+<hr />
+
+<h2>Visited Cities</h2>
+@if (Model.Reviews.Count != 0)
+{
+    @Html.Partial("_ReviewsCards", Model.Reviews)
+}
+else
+{
+    <p>User didn't post any reviews.</p>
+}
+<hr />
+
+<h2>Wished Cities</h2>
+@if (Model.WishedCities.Count != 0)
+{
+    @Html.Partial("_WishesCards", Model.WishedCities)
+}
+else
+{
+    <p>User didn't wished to visit any cities.</p>
+}
+<hr />

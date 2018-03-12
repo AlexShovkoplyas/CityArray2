@@ -1,0 +1,20 @@
+﻿@using CityArrayWeb
+@using CityArrayWeb.Components
+@using CityArrayWeb.ModelView
+@using PagedList.Mvc;
+@using CityArrayWeb.ModelView
+
+@model PagedList.IPagedList<ReviewInfo>
+
+@{
+    ViewBag.Title = "Reviews";
+}
+
+<h2>Reviews of user : @ViewBag.Person</h2>
+
+@Html.Partial("_ReviewsCards",Model)
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Reviews",
+    new { page, sortFilter = ViewBag.sortFilter, searchFilter = ViewBag.searchFilter }))

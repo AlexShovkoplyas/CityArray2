@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Main";
+}
+
+<h2>Main</h2>
+
+<h3>Most Reviewed cities :</h3>
+@Html.Action("MostReviewedCities")
+
+<h3>Last reviews :</h3>
+@Html.Action("RecentReviews", "Reviews")
+
+<h3>Last wishes :</h3>
+@Html.Action("RecentWishes", "Wishes")

@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<a class="btn btn-default" href="@Url.Action(nameof(CityArrayWeb.Controllers.ReviewsController.List), "Reviews")">All Reviews</a>
+
+<h3>Recently added reviews</h3>
+@Html.Action(nameof(CityArrayWeb.Controllers.ReviewsController.RecentReviews), "Reviews", new { count = 8 })

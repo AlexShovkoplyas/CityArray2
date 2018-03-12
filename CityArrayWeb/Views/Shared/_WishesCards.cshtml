@@ -1,0 +1,14 @@
+﻿@model IEnumerable<CityArrayWeb.ModelView.WishedCityView>
+
+<div class="container">
+    <div class="flex-row row">
+        @foreach (var item in Model)
+        {
+            <div class="col-xs-6 col-sm-4 col-lg-3">
+                <a href="@Html.Action(nameof(CityArrayWeb.Controllers.CityController.Info), "City",item.CityId)">@item.CityName</a>
+                <a href="@Html.Action(nameof(CityArrayWeb.Controllers.PeopleController.Info), "City",item.PersonId)">@item.PersonName</a>
+                <p>@item.Date</p>
+            </div>
+        }
+    </div>
+</div>

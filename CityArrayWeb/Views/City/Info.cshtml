@@ -1,0 +1,57 @@
+﻿@model CityArrayWeb.ModelView.CityView
+
+@{
+    ViewBag.Title = "Info";
+}
+
+<h2>Info</h2>
+
+<div>
+    <h4>CityView</h4>
+    <hr />
+    <div id="map"></div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCapital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCapital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @MyHelpers.SetRating(Model.Rating)
+        </dd>
+    </dl>
+    <div id="Latitude" hidden>@Model.Latitude</div>
+    <div id="Longitude" hidden>@Model.Longitude</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+
+    @section scripts{
+        <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHN84SGaz7Lv1B9I0GpYWwv-o2i5SZZew"></script>
+        @Scripts.Render("~/bundles/maps")
+    }
+</p>

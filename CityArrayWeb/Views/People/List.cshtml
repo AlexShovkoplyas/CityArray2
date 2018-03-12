@@ -1,0 +1,57 @@
+﻿
+@using CityArrayWeb.Components
+@using CityArrayWeb.ModelView
+@using PagedList.Mvc;
+@model PagedList.IPagedList<PersonInfo>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("List", "People", FormMethod.Get))
+{
+    <p>
+        Search by name: @Html.TextBox("searchFilter", ViewBag.searchFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        @Html.TableHeadRowSortable(typeof(PersonInfo), "People", "List", (string)ViewBag.sortFilter, (string)ViewBag.searchFilter)
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.NickName, "Info", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>*@
+        </tr>
+    }
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("List",
+    new { page, sortFilter = ViewBag.sortFilter, searchFilter = ViewBag.searchFilter}))

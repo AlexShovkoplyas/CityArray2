@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<a class="btn btn-default" href="@Url.Action(nameof(CityArrayWeb.Controllers.PeopleController.List), "People")">All People</a>
+
+<h3>Most active people</h3>
+@Html.Action(nameof(CityArrayWeb.Controllers.PeopleController.MostActivePeople), "People", new { count = 4 })
+
+<h3>Recently added people</h3>
+@Html.Action(nameof(CityArrayWeb.Controllers.PeopleController.RecentlyAddedPeople), "People", new { count = 4 })

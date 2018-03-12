@@ -1,0 +1,21 @@
+﻿@using CityArrayWeb
+@using CityArrayWeb.Components
+@using CityArrayWeb.ModelView
+@using PagedList.Mvc;
+@using CityArrayWeb.ModelView
+
+@model PagedList.IPagedList<WishedCityView>
+
+@{
+    ViewBag.Title = "Wishes";
+}
+
+<h2>Wishes of user : @ViewBag.Person</h2>
+
+@Html.Partial("_WishesCards", Model)
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Wishes",
+    new { page, sortFilter = ViewBag.sortFilter, searchFilter = ViewBag.searchFilter }))
+

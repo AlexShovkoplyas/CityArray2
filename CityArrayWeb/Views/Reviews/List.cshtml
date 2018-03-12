@@ -1,0 +1,62 @@
+﻿@using CityArrayWeb
+@using CityArrayWeb.Components
+@using CityArrayWeb.ModelView
+@using PagedList.Mvc;
+@model PagedList.IPagedList<ReviewInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("List", "Reviews", FormMethod.Get))
+{
+    <p>
+        Search by city: @Html.TextBox("searchFilter", ViewBag.searchFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        @Html.TableHeadRowSortable(typeof(ReviewInfo), "Reviews", "List", (string)ViewBag.sortFilter, (string)ViewBag.searchFilter)
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityDescription)
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>*@
+        </tr>
+    }
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("List",
+    new { page, sortFilter = ViewBag.sortFilter, searchFilter = ViewBag.searchFilter }))

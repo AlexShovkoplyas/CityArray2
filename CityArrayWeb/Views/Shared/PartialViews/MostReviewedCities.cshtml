@@ -1,0 +1,22 @@
+﻿@model IEnumerable<CityArrayWeb.ModelView.CityInfo>
+
+<div>
+    <h4>Most reviewed cities</h4>
+    <hr />
+    @foreach (var item in Model)
+    {
+    <div>
+        <p> <span style="@item.IsCapital?" font-weight: bold">@item.Name</span>, @item.CountryName</p>
+        <p>
+            @Html.DisplayNameFor(m => m.ReviewsCount) : @item.ReviewsCount
+        </p>
+        <p>
+            @Html.DisplayNameFor(m => m.WishesCount) : @item.WishesCount
+        </p>
+        <div><img src="@item.CoverPictureUrl()" /></div>
+        <a class="btn btn-default" href="@Url.Action("Info","City",item.Id)">Visit</a>
+        <hr />
+    </div>
+    }
+
+</div>
