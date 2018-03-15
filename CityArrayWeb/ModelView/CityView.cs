@@ -36,9 +36,15 @@ namespace CityArrayWeb.ModelView
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Display(Name = "Country")]
         public string CountryName { get; set; }
         public bool IsCapital { get; set; }
         public int? Rating { get; set; }
+
+        [Display(Name = "Reviews Count")]
+        public int ReviewsCount { get; set; }
+        [Display(Name = "Wishes Count")]
+        public int WishesCount { get; set; }
 
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
@@ -49,6 +55,10 @@ namespace CityArrayWeb.ModelView
         public string CoverPictureUrl() => "~/Images/City/" + Id + "/1.jpg";
     }
 
+    public class CityIndex
+    {
+        public string CoordinatesJson { get; set; }
+    }
 
     public class CityInfo
     {
@@ -61,6 +71,8 @@ namespace CityArrayWeb.ModelView
         public int ReviewsCount { get; set; }
         [Display(Name = "Wishes Count")]
         public int WishesCount { get; set; }
+
+        public int? Rating { get; set; }
 
         public string CoverPictureUrl() => "~/Images/City/" + Id + "/1.jpg";
     }

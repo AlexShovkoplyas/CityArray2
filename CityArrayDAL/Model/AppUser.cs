@@ -12,8 +12,6 @@ namespace CityArrayDAL.Model
 {
     public class AppUser : IdentityUser<int, AppUserLogin, AppUserRole, AppUserClaim>
     {
-        //public string Email { get; set; }
-
         public virtual Person Person { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(AppUserManager manager)

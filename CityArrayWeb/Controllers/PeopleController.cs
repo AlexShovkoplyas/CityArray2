@@ -11,6 +11,8 @@ using System.Web.Mvc;
 using PagedList;
 using CityArrayDAL.Model;
 using System.Linq.Dynamic;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace CityArrayWeb.Controllers
 {
@@ -66,11 +68,38 @@ namespace CityArrayWeb.Controllers
             }
 
             var person = db.People.GetOne(id.Value);
+            if (person==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             person.Reviews = person.Reviews.OrderByDescending(r => r.CreationDate).Take(count).ToList();
             person.WishedCities = person.WishedCities.OrderByDescending(r => r.Date).Take(count).ToList();
 
             var personView = Mapper.Map<PersonView>(person);
 
+            var visitCoords = person.Reviews.Select(p => new PersonReviewCoord
+            {
+                CityName = p.City.Name,
+                ReviewId = p.Id,
+                ReviewTitle = p.CityDescription,
+                Latitude = p.City.Latitude,
+                Longitude = p.City.Longitude
+            }).ToArray();
+            var wishedCoords = person.WishedCities.Select(p => new PersonWishCoord
+            {
+                CityName = p.City.Name,
+                CityId = p.City.Id,
+                Latitude = p.City.Latitude,
+                Longitude = p.City.Longitude,
+            }).ToArray();
+
+            //personView.VisitCoordsJson = new JavaScriptSerializer().Serialize(visitCoords);
+            personView.VisitCoordsJson = JsonConvert.SerializeObject(visitCoords, Formatting.None);
+            personView.WishedCoordsJson = new JavaScriptSerializer().Serialize(wishedCoords);
+
+            
+            
             return View(personView);
         }
 
@@ -115,7 +144,7 @@ namespace CityArrayWeb.Controllers
         [ChildActionOnly]
         public ActionResult MostActivePeople(int count = 4)
         {
-            var people = db.People.GetAll().OrderByDescending(p => p.Reviews.Count + p.WishedCities.Count);
+            var people = db.People.GetAll().OrderByDescending(p => p.Reviews.Count + p.WishedCities.Count).Take(count);
             var peopleView = Mapper.Map<List<PersonInfo>>(people);
 
             return PartialView("_PeopleCards", peopleView);
@@ -124,7 +153,7 @@ namespace CityArrayWeb.Controllers
         [ChildActionOnly]
         public ActionResult RecentlyAddedPeople(int count = 4)
         {
-            var people = db.People.GetAll().OrderByDescending(p => p.AddDay);
+            var people = db.People.GetAll().OrderByDescending(p => p.AddDay).Take(count);
             var peopleView = Mapper.Map<List<PersonInfo>>(people);
 
             return PartialView("_PeopleCards", peopleView);

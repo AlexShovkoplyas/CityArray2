@@ -16,7 +16,7 @@ namespace CityArrayDAL.EF
         
         static CityArrayContext()
         {
-            //Database.SetInitializer<CityArrayContext>(new ContextInitializer());
+            Database.SetInitializer<CityArrayContext>(new ContextInitializer());
         }
 
         public DbSet<City> Cities { get; set; }

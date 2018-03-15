@@ -25,7 +25,7 @@ namespace CityArrayDAL.Repository.Base
             return dbSet.OrderByDescending(c => c.Reviews.Count).Take(count).ToList();
         }
 
-        public Dictionary<string, int> CityDictionary()
+        public Dictionary<string, int> GetDictionary()
         {
             var dictionary = new Dictionary<string,int>(dbSet.Count());
             foreach (var item in dbSet)

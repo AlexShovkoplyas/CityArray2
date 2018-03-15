@@ -8,5 +8,7 @@ namespace CityArrayDAL.Repository.Interfaces
         IEnumerable<City> MostReviewedCities(int count);
 
         City GetByName(string City, int CountryId);
+
+        Dictionary<string, int> GetDictionary();
     }
 }

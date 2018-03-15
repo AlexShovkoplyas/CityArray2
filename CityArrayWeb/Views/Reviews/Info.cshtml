@@ -6,10 +6,9 @@
 }
 
 <h2>Show</h2>
+<a href="@Url.Action(nameof(ReviewsController.List))" class="btn btn-danger">Back to all Reviews</a>
 
 <div>
-    <h4>ReviewView</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CityName)
@@ -70,12 +69,11 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+
 </p>
 
 @section Recommendations {
-    
+<h3>Recommended reviews</h3>    
 @Html.Action(nameof(CityArrayWeb.Controllers.ReviewsController.RecommendedReviews), new { reviewId = Model.Id, count = 4 })
 
 

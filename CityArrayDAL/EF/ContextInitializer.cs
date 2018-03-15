@@ -1,18 +1,14 @@
 ﻿using CityArrayDAL.Identity;
 using CityArrayDAL.Model;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CityArrayDAL.EF
 {
-
-    class ContextInitializer : DropCreateDatabaseAlways<CityArrayContext>
+    class ContextInitializer : CreateDatabaseIfNotExists<CityArrayContext>
     {
         protected override void Seed(CityArrayContext context)
         {

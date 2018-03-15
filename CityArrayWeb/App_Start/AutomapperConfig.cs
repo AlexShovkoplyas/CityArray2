@@ -3,6 +3,7 @@ using CityArrayDAL.Model;
 using CityArrayWeb.ModelView;
 using System;
 using System.Linq;
+using System.Web.Script.Serialization;
 
 namespace CityArrayWeb
 {
@@ -30,7 +31,11 @@ namespace CityArrayWeb
 
 
                 cfg.CreateMap<Person, PersonView>()
-                    .ForMember(p => p.CountryName, opt => opt.MapFrom(p => p.Nationality.Name));
+                    .ForMember(p => p.CountryName, opt => opt.MapFrom(p => p.Nationality.Name))
+                    .ForMember(v => v.ReviewsCount, opt => opt.MapFrom(m => m.Reviews.Count))
+                    .ForMember(v => v.WishesCount, opt => opt.MapFrom(m => m.WishedCities.Count))
+                    .ForMember(v => v.VisitCoordsJson, opt => opt.Ignore())
+                    .ForMember(v => v.WishedCoordsJson, opt => opt.Ignore());
 
                 cfg.CreateMap<Person, PersonInfo>()
                     .ForMember(p => p.CountryName, opt => opt.MapFrom(p => p.Nationality.Name))
@@ -49,10 +54,13 @@ namespace CityArrayWeb
 
                 cfg.CreateMap<City, CityView>()
                     .ForMember(v => v.CountryName, opt => opt.MapFrom(m => m.Country.Name))
-                    .ForMember(v => v.Rating, opt => opt.MapFrom(m => m.Reviews.Count == 0 ? null : (int?)Math.Round(m.Reviews.Average(r => r.Rating))));
+                    .ForMember(v => v.Rating, opt => opt.MapFrom(m => m.Reviews.Count == 0 ? null : (int?)Math.Round(m.Reviews.Average(r => r.Rating))))
+                    .ForMember(v => v.ReviewsCount, opt => opt.MapFrom(m => m.Reviews.Count))
+                    .ForMember(v => v.WishesCount, opt => opt.MapFrom(m => m.WishedCities.Count));
 
                 cfg.CreateMap<City, CityInfo>()
                     .ForMember(v => v.CountryName, opt => opt.MapFrom(m => m.Country.Name))
+                    .ForMember(v => v.Rating, opt => opt.MapFrom(m => m.Reviews.Count == 0 ? null : (int?)Math.Round(m.Reviews.Average(r => r.Rating))))
                     .ForMember(v => v.ReviewsCount, opt => opt.MapFrom(m => m.Reviews.Count))
                     .ForMember(v => v.WishesCount, opt => opt.MapFrom(m => m.WishedCities.Count));
 

@@ -11,21 +11,30 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CityArrayDAL.Model;
 using System;
+using log4net;
+using CityArrayDAL.UnitOfWork;
 
 namespace CityArrayWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private IRepo db;
+        private ILog logger;
+
         private AppSignInManager _signInManager;
         private AppUserManager _userManager;
 
-        public AccountController()
+        public AccountController(IRepo repo)
         {
+            db = repo;
+            logger = LogManager.GetLogger(this.GetType());
         }
 
-        public AccountController(AppUserManager userManager, AppSignInManager signInManager)
+        public AccountController(AppUserManager userManager, AppSignInManager signInManager, IRepo repo)
         {
+            db = repo;
+            logger = LogManager.GetLogger(this.GetType());
             UserManager = userManager;
             SignInManager = signInManager;
         }
@@ -42,6 +51,7 @@ namespace CityArrayWeb.Controllers
             private set => _userManager = value;
         }
 
+        
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -131,6 +141,7 @@ namespace CityArrayWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            PopulateCountriesDropDownList();
             return View();
         }
 
@@ -476,5 +487,11 @@ namespace CityArrayWeb.Controllers
             }
         }
         #endregion
+
+
+        private void PopulateCountriesDropDownList(int? cityId = null)
+        {
+            ViewBag.Countries = db.Countries.GetDictionary();
+        }
     }
 }

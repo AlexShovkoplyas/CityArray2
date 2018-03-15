@@ -221,18 +221,18 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Components\TableHeadRowSortable.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\CityController.cs" />
-    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WishesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Class1.cs" />
     <Compile Include="ModelView\AccountViewModels.cs" />
     <Compile Include="ModelView\CityView.cs" />
+    <Compile Include="ModelView\MapData.cs" />
     <Compile Include="ModelView\ManageViewModels.cs" />
     <Compile Include="ModelView\PersonView.cs" />
     <Compile Include="ModelView\RegisterViewModel.cs" />
@@ -347,6 +347,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mapInfoPlaces.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -364,7 +365,6 @@
     <Content Include="Views\Country\Edit.cshtml" />
     <Content Include="Views\Country\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout__test.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\City\Add.cshtml" />
@@ -388,8 +388,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Reviews\Info.cshtml" />
     <Content Include="Views\Reviews\Add.cshtml" />
-    <Content Include="Views\Shared\_Layout_review.cshtml" />
-    <Content Include="Views\Shared\PartialViews\_RecommendedReviews.cshtml" />
     <Content Include="Views\Reviews\List.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\People\Info.cshtml" />
@@ -401,7 +399,6 @@
     <Content Include="Views\City\List.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\PartialViews\MostReviewedCities.cshtml" />
     <Content Include="Views\Shared\_CitiesCards.cshtml" />
     <Content Include="Views\Shared\_PeopleCards.cshtml" />
     <Content Include="Views\City\Info.cshtml" />
@@ -409,13 +406,15 @@
     <Content Include="Views\Reviews\Index.cshtml" />
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Scripts\mapInfoLoad.js" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Reviews\ListByPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\City\" />
     <Folder Include="Images\Person\" />
     <Folder Include="Images\Review\" />
-    <Folder Include="Views\Shared\Blocks\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\Wishes\" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@
                     @Html.DisplayNameFor(m => m.WishesCount) : @item.WishesCount
                 </p>
                 <div><img src="@item.CoverPictureUrl()" /></div>
-                <a class="btn btn-default" href="@Url.Action(nameof(CityArrayWeb.Controllers.PeopleController.Info),"People",item.Id)">Visit</a>
+                <a class="btn btn-default" href="@Url.Action(nameof(CityArrayWeb.Controllers.PeopleController.Info),"People",new { id = item.Id })">Visit</a>
                 <hr />
             </div>
         }

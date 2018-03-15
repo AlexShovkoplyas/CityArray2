@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace CityArrayDAL.Model
 {
@@ -12,7 +13,7 @@ namespace CityArrayDAL.Model
         public string NickName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int? CountryId { get; set; }        
+        public int? CountryId { get; set; }
         public DateTime? BirthDay { get; set; }
         public DateTime AddDay { get; set; }
 
@@ -34,11 +35,14 @@ namespace CityArrayDAL.Model
                 if (BirthDay > today.AddYears(-age)) age--;
                 return age;
             }
-            return null;            
+            return null;
         }
 
+        //public decimal[][] VisitedCitiesCoordinated() =>
+        //    Reviews.Select(p => new[] { p.City.Latitude, p.City.Longitude }).ToArray();
 
+        //public decimal[][] WishedCitiesCoordinated() =>
+        //    WishedCities.Select(p => new[] { p.City.Latitude, p.City.Longitude }).ToArray();
+        
     }
-
-    
 }

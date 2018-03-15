@@ -6,6 +6,18 @@
 
 <h2>Info</h2>
 
+@if (User.IsInRole("Admin"))
+{
+    <a href="@Url.Action(nameof(CityController.Edit),new {id=Model.Id})" class="btn btn-default">Modify city</a>
+}
+
+@if (User.IsInRole("User"))
+{
+    <a href="@Url.Action(nameof(ReviewsController.Add),"Reviews")" class="btn btn-default">Add review</a>
+    <a href="@Url.Action(nameof(WishesController.Add),"Wishes")" class="btn btn-default">Add to wishes</a>
+}
+@*<a href="@Url.Action(nameof(ReviewsController.CityList),"Reviews")" class="btn btn-default">Show city reviews</a>*@
+
 <div>
     <h4>CityView</h4>
     <hr />
@@ -42,16 +54,37 @@
         <dd>
             @MyHelpers.SetRating(Model.Rating)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewsCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewsCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WishesCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WishesCount)
+        </dd>
+
+
     </dl>
     <div id="Latitude" hidden>@Model.Latitude</div>
     <div id="Longitude" hidden>@Model.Longitude</div>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
 
-    @section scripts{
-        <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHN84SGaz7Lv1B9I0GpYWwv-o2i5SZZew"></script>
-        @Scripts.Render("~/bundles/maps")
-    }
-</p>
+    <hr />
+
+    @Html.Action(nameof(ReviewsController.RecentCityReviews),"Reviews",new {cityId=Model.Id, count = 8})
+
+</div>
+
+
+@section scripts{
+    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHN84SGaz7Lv1B9I0GpYWwv-o2i5SZZew"></script>
+    @Scripts.Render("~/bundles/maps")
+}
+

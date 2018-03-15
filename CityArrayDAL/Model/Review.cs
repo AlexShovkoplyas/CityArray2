@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CityArrayDAL.Model
 {
@@ -18,6 +17,5 @@ namespace CityArrayDAL.Model
         public virtual City City { get; set; }
         public virtual Person Person { get; set; }
         public virtual List<Comment> Comments { get; set; }
-
     }
 }

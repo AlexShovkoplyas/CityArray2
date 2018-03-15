@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CityArrayDAL.Model
 {
@@ -13,9 +10,7 @@ namespace CityArrayDAL.Model
         public int PersonId { get; set; }
         public DateTime Date { get; set; }
 
-
         public virtual City City { get; set; }
         public virtual Person Person { get; set; }
-
     }
 }

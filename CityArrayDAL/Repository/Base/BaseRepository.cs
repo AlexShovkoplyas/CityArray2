@@ -9,7 +9,6 @@ using log4net;
 
 namespace CityArrayDAL.Repository.Base
 {
-//IRepository<T>
     public class BaseRepository<T>: IBaseRepository<T> where T :  class, IIdKey, new()
     {
         protected DbSet<T> dbSet;

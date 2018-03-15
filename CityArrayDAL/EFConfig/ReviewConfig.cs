@@ -16,8 +16,6 @@ namespace CityArrayDAL.EFConfig
             Property(p => p.CityBags).IsOptional().HasMaxLength(500);
 
             HasMany(p => p.Comments).WithRequired(p => p.Review).HasForeignKey(p => p.ReviewId);//.WillCascadeOnDelete(true);
-        }
-
-        
+        }        
     }
 }

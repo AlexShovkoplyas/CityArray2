@@ -29,5 +29,10 @@ namespace CityArrayWeb.Controllers
             return PartialView("_WishesCards", wishesView);                
         }
 
+        public void Add(int? id)
+        {
+
+        }
+
     }
 }

@@ -9,7 +9,6 @@ namespace CityArrayDAL.EFConfig
         {
             HasKey(p => p.Id);
             HasIndex(p => new {p.CityId, p.PersonId}).IsUnique(true);
-
         }        
     }
 }

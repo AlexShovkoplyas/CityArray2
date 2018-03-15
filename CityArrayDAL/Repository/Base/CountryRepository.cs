@@ -16,16 +16,14 @@ namespace CityArrayDAL.Repository.Base
             return dbSet.FirstOrDefault(c => c.Name == Name);
         }
 
-        public Dictionary<string, int> CountryDictionary() => DictionaryIdName(dbSet.ToList().Select(c => Tuple.Create(c.Name, c.Id)));
-
-        private Dictionary<T1, T2> DictionaryIdName<T1, T2>(IEnumerable<Tuple<T1, T2>> list)
+        public Dictionary<string, int> GetDictionary()
         {
-            var res = new Dictionary<T1, T2>();
-            foreach (var tuple in list)
+            var dictionary = new Dictionary<string, int>(dbSet.Count());
+            foreach (var item in dbSet)
             {
-                res.Add(tuple.Item1, tuple.Item2);
+                dictionary.Add(item.Name, item.Id);
             }
-            return res;
+            return dictionary;
         }
     }
 }

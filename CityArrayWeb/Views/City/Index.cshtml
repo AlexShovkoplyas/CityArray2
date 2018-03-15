@@ -1,15 +1,75 @@
-﻿
+﻿@using CityArrayWeb
+@using CityArrayWeb.Controllers
+@using CityArrayWeb.ModelView
+@model CityIndex
 @{
     ViewBag.Title = "Main";
 }
 
 <h2>Main</h2>
 
+<div id="map" class="big-map"></div>
+
+@if (User.IsInRole("user"))
+{
+    <a href="@Url.Action(nameof(CityController.Add))" class="btn btn-default">Add new City</a>
+}
+
+<a href="@Url.Action(nameof(CityController.List))" class="btn btn-default">Show all cities</a>
+
+
 <h3>Most Reviewed cities :</h3>
-@Html.Action("MostReviewedCities")
+@Html.Action(nameof(CityController.MostReviewedCities), "City")
 
 <h3>Last reviews :</h3>
-@Html.Action("RecentReviews", "Reviews")
+@Html.Action(nameof(ReviewsController.RecentReviews), "Reviews")
 
 <h3>Last wishes :</h3>
-@Html.Action("RecentWishes", "Wishes")
+@Html.Action(nameof(WishesController.RecentWishes), "Wishes")
+
+@section scripts{
+    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHN84SGaz7Lv1B9I0GpYWwv-o2i5SZZew"></script>
+    <script type="text/javascript">
+        var cities = @Html.Raw(Model.CoordinatesJson);
+
+        var map;
+        var infoWindow;
+
+        window.onload = function () {
+            showMap();
+        }
+
+        function showMap() {
+            var mapOptions = {
+                zoom: 2,
+                center: new google.maps.LatLng(20, 20)
+            };
+            var mapDiv = document.getElementById("map");
+            map = new google.maps.Map(mapDiv, mapOptions);
+
+            infoWindow = new google.maps.InfoWindow();
+
+            google.maps.event.addListener(map, 'click', function () {
+                infoWindow.close();
+            });
+
+            cities.map(function (item, i) {
+                LatLng = new google.maps.LatLng(item.Latitude, item.Longitude);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: LatLng,
+                    title: item.CityName
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.close();
+                    infoWindow = new google.maps.InfoWindow();
+                    infoWindow.setContent(item.CityName);
+                    infoWindow.open(map, marker);
+                });
+            });
+
+
+        }
+    </script>
+}

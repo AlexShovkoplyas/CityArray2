@@ -31,7 +31,7 @@ namespace CityArrayWeb.Components
 
                 if (sortField != field.Name)
                 {
-                    newSortFilter = field.Name + " " + "ascending";
+                    newSortFilter = field.Name + " " + "descending";
                 }
                 else
                 {

@@ -5,7 +5,7 @@ namespace CityArrayDAL.Repository.Interfaces
 {
     public interface ICountryRepository: IBaseRepository<Country>
     {
-        Dictionary<string,int> CountryDictionary();
+        Dictionary<string,int> GetDictionary();
 
         Country GetByName(string Name);
     }

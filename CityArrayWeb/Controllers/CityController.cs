@@ -1,5 +1,4 @@
-﻿using CityArrayWeb.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +12,7 @@ using System.Net;
 using System.Linq.Dynamic;
 using PagedList;
 using log4net;
+using Newtonsoft.Json;
 
 namespace CityArrayWeb.Controllers
 {
@@ -73,6 +73,7 @@ namespace CityArrayWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -89,12 +90,13 @@ namespace CityArrayWeb.Controllers
 
             var cityView = Mapper.Map<CityModify>(cityModel);
 
-            ViewBag.Countries = db.Countries.CountryDictionary();
+            ViewBag.Countries = db.Countries.GetDictionary();
 
             return View(cityView);
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CityModify cityView, HttpPostedFileBase picture)
         {
@@ -136,14 +138,15 @@ namespace CityArrayWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult Add()
         {
             PopulateCountriesDropDownList();
-
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Add(CityModify cityView, HttpPostedFileBase picture)
         {
@@ -178,7 +181,20 @@ namespace CityArrayWeb.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var coordinates = db.Cities.GetAll().Select(p => new CityCoord
+            {
+                Latitude = p.Latitude,
+                Longitude = p.Longitude,
+                CityId = p.Id,
+                CityName = p.Name
+            });
+
+            var model = new CityIndex()
+            {
+                CoordinatesJson = JsonConvert.SerializeObject(coordinates, Formatting.None)
+            };
+
+            return View(model);
         }
 
         [ChildActionOnly]
@@ -198,7 +214,7 @@ namespace CityArrayWeb.Controllers
 
         private void PopulateCountriesDropDownList(int? cityId = null)
         {
-            ViewBag.Countries = db.Countries.CountryDictionary();
+            ViewBag.Countries = db.Countries.GetDictionary();
         }
 
         protected override void Dispose(bool disposing)

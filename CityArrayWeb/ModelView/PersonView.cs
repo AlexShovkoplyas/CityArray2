@@ -21,8 +21,16 @@ namespace CityArrayWeb.ModelView
         [DisplayFormat(NullDisplayText = "Unknown")]
         public int Age { get; set; }
 
+        [Display(Name = "Reviews Count")]
+        public int ReviewsCount { get; set; }
+        [Display(Name = "Wishes Count")]
+        public int WishesCount { get; set; }
+
         public List<ReviewInfo> Reviews { get; set; }
         public List<WishedCityView> WishedCities { get; set; }
+
+        public string VisitCoordsJson { get; set; }
+        public string WishedCoordsJson { get; set; }
 
         public string CoverPictureUrl() => "~/Images/Person/" + Id + "/1.jpg";
     }

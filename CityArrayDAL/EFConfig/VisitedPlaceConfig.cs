@@ -10,7 +10,6 @@ namespace CityArrayDAL.EFConfig
             HasKey(p => p.Id);
             Property(p => p.Name).IsRequired();
             Property(p => p.Name).HasMaxLength(50);
-
         }        
     }
 }

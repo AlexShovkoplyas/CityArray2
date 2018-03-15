@@ -1,0 +1,66 @@
+﻿@using System.Web.Mvc
+@using System.Web.Routing
+@using System.Web.Mvc.Html
+@using System.Web.WebPages.Html;
+@using System.Web.Mvc.Html
+@using System.Web.Mvc
+@using System.Web.Mvc.Ajax
+@using System.Web.Mvc.Html
+@using System.Web.Optimization
+@using @using
+
+// Using's are needed to ensure helpers function correctly.
+@using System.Web.Mvc;
+@using System.Web.Mvc.Html;
+@using System.Web.Mvc.Routing;
+@using System.Web.Mvc.Razor;
+@*@functions {
+        private static WebViewPage page { get { return PageContext.Page as WebViewPage; } }
+        private static System.Web.Mvc.HtmlHelper<dynamic> html { get { return page.Html; } }
+        private static UrlHelper url { get { return page.Url; } }
+        private static dynamic viewBag { get { return page.ViewBag; } }
+    }*@
+
+
+
+
+
+
+
+@*@functions {
+        MvcHtmlString Action(Delegate action, object routeValues)
+        {
+            string actionName = nameof(action);
+            string controllerName = action.Method.DeclaringType.Name.Replace("Controller", "");
+            return HtmlHelper.ac
+                }
+    }
+
+    @Html.Action(nameof(WishesController.RecentWishes), "Wishes")*@
+
+
+@functions {
+    public static WebViewPage page = (PageContext.Page as WebViewPage);
+    public static HtmlHelper<object> html = page.Html;
+}
+
+@helper ReplaceCrLf(string strText)
+    {
+        @html.Raw(Html.Encode(strText).Replace(Environment.NewLine, "<br />"));
+}
+
+@helper  Action(Delegate action, object routeValues)
+    {
+        string actionName = nameof(action);
+        string controllerName = action.Method.DeclaringType.Name.Replace("Controller", "");
+
+        @html.Action(actionName, controllerName, routeValues)
+}
+
+@helper  Action(Delegate action)
+    {
+        string actionName = nameof(action);
+        string controllerName = action.Method.DeclaringType.Name.Replace("Controller", "");
+
+        @html.Action(actionName, controllerName)
+}

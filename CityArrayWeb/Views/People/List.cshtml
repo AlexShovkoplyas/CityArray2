@@ -10,9 +10,6 @@
 
 <h2>List</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 @using (Html.BeginForm("List", "People", FormMethod.Get))
 {
@@ -29,23 +26,32 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.ActionLink(item.NickName, "Info", new { id = item.Id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
+    <tr>
+        <td>
+            @Html.ActionLink(item.NickName, "Info", new { id = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
 
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>*@
-        </tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewsCount)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.WishesCount)
+        </td>
+
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>*@
+    </tr>
     }
 
 </table>
