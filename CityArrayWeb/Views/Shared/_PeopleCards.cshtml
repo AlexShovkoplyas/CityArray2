@@ -1,28 +1,30 @@
 ﻿@model IEnumerable<CityArrayWeb.ModelView.PersonInfo>
 
-<div class="container">
+<div class="container index-content">
     <div class="flex-row row">
         @foreach (var item in Model)
         {
             <div class="col-xs-6 col-sm-4 col-lg-3">
-                <p>
-                    @Html.DisplayNameFor(m => m.NickName) : @item.NickName
-                </p>
-                <p>
-                    @Html.DisplayNameFor(m => m.CountryName) : @item.CountryName
-                </p>
-                <p>
-                    @Html.DisplayNameFor(m => m.Age) : @item.Age
-                </p>
-                <p>
-                    @Html.DisplayNameFor(m => m.ReviewsCount) : @item.ReviewsCount
-                </p>
-                <p>
-                    @Html.DisplayNameFor(m => m.WishesCount) : @item.WishesCount
-                </p>
-                <div><img src="@item.CoverPictureUrl()" /></div>
-                <a class="btn btn-default" href="@Url.Action(nameof(CityArrayWeb.Controllers.PeopleController.Info),"People",new { id = item.Id })">Visit</a>
-                <hr />
+                <div class="card">
+                    <img src="@item.CoverPictureUrl()" />
+                    <p>
+                        @Html.DisplayNameFor(m => m.NickName) : @item.NickName
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(m => m.CountryName) : @item.CountryName
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(m => m.Age) : @item.Age
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(m => m.ReviewsCount) : @item.ReviewsCount
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(m => m.WishesCount) : @item.WishesCount
+                    </p>
+                    <a class="btn blue-button" href="@Url.Action(nameof(CityArrayWeb.Controllers.PeopleController.Info),"People",new { id = item.Id })">Visit</a>
+                    <hr />
+                </div>
             </div>
         }
     </div>

@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<CityArrayWeb.ModelView.ReviewInfo>
 
-<div class="container">
+<div class="container index-content">
     <div class="flex-row row">
         @foreach (var item in Model)
         {
             <div class="col-xs-6 col-sm-4 col-lg-3">
-                <a href="@Url.Action("Info","Reviews",new { id = item.Id })" style="display:block">
-                    <div>
-                        <p>@item.CityName</p>
-                        <p>@item.PersonName</p>
-                        <p>@MyHelpers.SetRating(item.Rating)</p>
-                        <p>@item.CreationDate</p>
-                        <p>@item.CityDescription</p>
-                    </div>
-                </a>
+                <div class="card">
+                    <p>@item.CityName</p>
+                    <p>@item.PersonName</p>
+                    <p>@MyHelpers.SetRating(item.Rating)</p>
+                    <p>@item.CreationDate</p>
+                    <p>@item.CityDescription</p>
+
+                    <a href="@Url.Action("Info", "Reviews", new { id = item.Id })" class="btn blue-button">Read</a>
+                </div>
             </div>
         }
     </div>

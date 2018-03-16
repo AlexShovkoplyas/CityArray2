@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CityArrayDAL.EF
 {
-    class ContextInitializer : CreateDatabaseIfNotExists<CityArrayContext>
+    class ContextInitializer : DropCreateDatabaseAlways<CityArrayContext>
     {
         protected override void Seed(CityArrayContext context)
         {
@@ -41,6 +41,8 @@ namespace CityArrayDAL.EF
                 userManager.AddToRole(users[i].Id, "User");
             }
 
+            context.SaveChanges();
+
             var countries = new Country[]
             {
                 new Country{Name = "Ukraine"},
@@ -60,7 +62,8 @@ namespace CityArrayDAL.EF
                     NickName = "Alex First",
                     BirthDay = new DateTime(1980,1,5),
                     Nationality = countries[0],
-                    AppUser = users[0]
+                    AppUser = users[0],
+                    AddDay = DateTime.Today
                 },
                 new Person
                 {
@@ -69,7 +72,8 @@ namespace CityArrayDAL.EF
                     NickName = "Alex Second",
                     BirthDay = new DateTime(1990,3,5),
                     Nationality = countries[1],
-                    AppUser = users[1]
+                    AppUser = users[1],
+                    AddDay = DateTime.Today
                 },
                 new Person
                 {
@@ -78,7 +82,8 @@ namespace CityArrayDAL.EF
                     NickName = "Alex Third",
                     BirthDay = new DateTime(2000,6,5),
                     Nationality = countries[0],
-                    AppUser = users[2]
+                    AppUser = users[2],
+                    AddDay = DateTime.Today
                 },
                 new Person
                 {
@@ -87,7 +92,8 @@ namespace CityArrayDAL.EF
                     NickName = "Alex Forth",
                     BirthDay = new DateTime(1987,1,5),
                     Nationality = countries[2],
-                    AppUser = users[3]
+                    AppUser = users[3],
+                    AddDay = DateTime.Today
                 },
                 new Person
                 {
@@ -96,11 +102,14 @@ namespace CityArrayDAL.EF
                     NickName = "Alex Fifth",
                     BirthDay = new DateTime(1994,12,5),
                     Nationality = countries[1],
-                    AppUser = users[4]
+                    AppUser = users[4],
+                    AddDay = DateTime.Today
                 }
             };
 
             context.People.AddRange(people);
+
+            context.SaveChanges();
 
             var cities = new City[]
             {
@@ -155,6 +164,8 @@ namespace CityArrayDAL.EF
             };
 
             context.Cities.AddRange(cities);
+
+            context.SaveChanges();
 
             var reviews = new Review[]
             {
